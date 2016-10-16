@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # one of the Redirect URIs from Google APIs console
-REDIRECT_URI = '/oauth2callback'
+REDIRECT_URI = "/oauth2callback"
 SECRET_KEY = "raindropsonroses"
 
 app.secret_key = SECRET_KEY
@@ -32,9 +32,8 @@ def button():
 
 @app.route('/OAuth')
 def google_crap():
-    """Would be great if this worked but I doubt it."""
-
-    #Next 5 blocks of code are for Google OAuth 
+    """Ummmm googleOauth???"""
+ 
     access_token = session.get('access_token')
     if access_token is None:
         return redirect(url_for('login'))
@@ -66,7 +65,11 @@ def login():
 def authorized(resp):
     access_token = resp['access_token']
     session['access_token'] = access_token, ''
-    return redirect(url_for('index'))
+    return redirect(url_for('yay'))
+
+@app.route("/success")
+def yay():
+  return render_template("success.html")
 
 
 @google.tokengetter
